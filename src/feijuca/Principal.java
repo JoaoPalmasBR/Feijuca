@@ -78,25 +78,42 @@ public class Principal extends javax.swing.JFrame {
             }
 
         };
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         btnMenuCaixa = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         btnMenuEstoque = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         btnMenuUsuarios = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Feijuca");
 
+        jButton1.setText("SAIR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        tela.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         javax.swing.GroupLayout telaLayout = new javax.swing.GroupLayout(tela);
         tela.setLayout(telaLayout);
         telaLayout.setHorizontalGroup(
             telaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 629, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaLayout.createSequentialGroup()
+                .addContainerGap(562, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         telaLayout.setVerticalGroup(
             telaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 442, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaLayout.createSequentialGroup()
+                .addContainerGap(408, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
 
         btnMenuCaixa.setText("Caixa");
@@ -108,7 +125,15 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.add(btnMenuCaixa);
 
         btnMenuEstoque.setText("Estoque");
-        btnMenuEstoque.setEnabled(false);
+
+        jMenuItem3.setText("Cadastrar Produto");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        btnMenuEstoque.add(jMenuItem3);
+
         jMenuBar1.add(btnMenuEstoque);
 
         btnMenuUsuarios.setText("Usuarios");
@@ -135,6 +160,16 @@ public class Principal extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        ProdutoCadastro TelaProdutoCadastro = new ProdutoCadastro();
+        tela.add(TelaProdutoCadastro);
+        TelaProdutoCadastro.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,21 +220,24 @@ public class Principal extends javax.swing.JFrame {
         usuarios.add(u2);
         Usuario u3 = new Usuario(3, "Eduardo", "eduardo", "eduardo", f3.funcao,1, 3);
         usuarios.add(u3);
-        
+        /*
         for (Funcionario f: funcionarios){
             System.out.println(f.toString());
         }
         for (Usuario u: usuarios){
             System.out.println(u.toString());
         }
+        */
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     static javax.swing.JMenu btnMenuCaixa;
     static javax.swing.JMenu btnMenuEstoque;
     static javax.swing.JMenu btnMenuUsuarios;
+    private javax.swing.JButton jButton1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     static javax.swing.JDesktopPane tela;
     // End of variables declaration//GEN-END:variables
 }
