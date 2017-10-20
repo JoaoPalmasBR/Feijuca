@@ -1,5 +1,8 @@
 package feijuca;
 
+import static feijuca.Principal.produtos;
+import javax.swing.JOptionPane;
+
 public class ProdutoCadastro extends javax.swing.JInternalFrame {
     float valor1=0;
     /**
@@ -37,6 +40,9 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
         jButton075 = new javax.swing.JButton();
         jButton10 = new javax.swing.JButton();
         jButtonLimpar = new javax.swing.JButton();
+        btnCadProd = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        tfQuant = new javax.swing.JTextField();
 
         setClosable(true);
         setForeground(java.awt.Color.black);
@@ -44,6 +50,7 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
 
         tfNomeProduto.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfNomeProduto.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tfNomeProduto.setNextFocusableComponent(jButton1);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,7 +211,7 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
             }
         });
 
-        jButton10.setText("10");
+        jButton10.setText(" + 10");
         jButton10.setMaximumSize(new java.awt.Dimension(40, 20));
         jButton10.setMinimumSize(new java.awt.Dimension(40, 20));
         jButton10.setName(""); // NOI18N
@@ -228,6 +235,26 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCadProd.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btnCadProd.setText("Cadastrar");
+        btnCadProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadProdActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Quantidade");
+
+        tfQuant.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        tfQuant.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tfQuant.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tfQuantKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -235,6 +262,7 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnCadProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(tfNomeProduto)
@@ -270,7 +298,9 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jButton075, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jButton10, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(tfQuant))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -309,7 +339,13 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
                     .addComponent(lbPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jButtonLimpar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(64, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tfQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -398,8 +434,45 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
         lbPreco.setText(valor1+"");
     }//GEN-LAST:event_jButtonLimparActionPerformed
 
+    private void btnCadProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadProdActionPerformed
+        CadastrarProduto();
+    }//GEN-LAST:event_btnCadProdActionPerformed
+
+    private void tfQuantKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfQuantKeyPressed
+        getRootPane().setDefaultButton(btnCadProd);
+    }//GEN-LAST:event_tfQuantKeyPressed
+
+    public void CadastrarProduto(){
+        String nome = tfNomeProduto.getText();
+        float valor = valor1;
+        int quant = Integer.parseInt(tfQuant.getText());
+        //System.out.println(nome+","+valor+","+quant);
+        if (quant<=0){
+            JOptionPane.showMessageDialog(rootPane,"Nao eh possivel inserir com Saldo Negativo!");
+        }
+        else{
+            Produto produto1=new Produto();
+            produto1.setNome(nome);
+            produto1.setValor(valor);
+            produto1.setQuant(quant);
+            // grave nessa conexão!!!
+            ProdutoDao dao = new ProdutoDao();
+            // método elegante
+            dao.adiciona(produto1);
+            produtos.add(produto1);
+            JOptionPane.showMessageDialog(rootPane,"Produto Gravado!");
+            Atualiza.AtualizaTudo();
+            Principal.jTextArea1.setText("");
+            for (Produto p: produtos){
+                //System.out.println(p.toString());
+                Principal.jTextArea1.append(p.getNome()+" - R$: "+p.getValor()+" - Quant: "+p.getQuant()+"\n");
+            }
+            this.dispose();
+        }
+    }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadProd;
     private javax.swing.JButton jButton025;
     private javax.swing.JButton jButton050;
     private javax.swing.JButton jButton075;
@@ -416,7 +489,9 @@ public class ProdutoCadastro extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButtonLimpar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel lbPreco;
     private javax.swing.JTextField tfNomeProduto;
+    private javax.swing.JTextField tfQuant;
     // End of variables declaration//GEN-END:variables
 }

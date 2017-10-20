@@ -1,15 +1,12 @@
 package feijuca;
 
 import java.awt.Dimension;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
-
+import static feijuca.login.usuarioEX;
 /*
  * Copyright 2017 joao.palmas.br.
  *
@@ -29,27 +26,41 @@ import javax.imageio.ImageIO;
 public class Principal extends javax.swing.JFrame {
     static ArrayList<Funcionario> funcionarios = new ArrayList<>();
     static ArrayList<Usuario> usuarios = new ArrayList<>();
+    static ArrayList<Produto> produtos = new ArrayList<>();
+    
     static Usuario u= null;
     static boolean statusLogin = false;
-    private BufferedImage img;
-
+    BufferedImage img;
+    static String titulo = "Feijuca 0.1";
     /**
      * Creates new form telaCaixa
      */
     public Principal() {
+        Atualiza.AtualizaTudo();
+        initComponents();
+        jInternalFrame1.setVisible(false);
+        this.setTitle(titulo);
         Toolkit tk = Toolkit.getDefaultToolkit();
         Dimension d = tk.getScreenSize();
         int largura = d.width;
         int altura = d.height;
-        setPreferredSize(new Dimension(largura,altura-50));
-        URL url = this.getClass().getResource("../img/logo.png");
-        Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
-        this.setIconImage(imagemTitulo);
+        setPreferredSize(new Dimension(largura-20,altura-20));
+        //this.setAlwaysOnTop(true);
+        //URL url = this.getClass().getResource("C:/Users/pix01/Desenvolvimento/NetBeans/Feijuca/src/img/logo.png");
+        //Image imagemTitulo = Toolkit.getDefaultToolkit().getImage(url);
+        //this.setIconImage(imagemTitulo);
+        //System.out.println(this.getHeight()+"");
         gera();
-        initComponents();
+        
         login telaLogin = new login();
         tela.add(telaLogin);
         telaLogin.setVisible(true);
+        //try {
+            //String comando = "C:/Users/pix01/Downloads/Win32DiskImager-0.9.5-install.exe";
+            //Process processo = Runtime.getRuntime().exec(comando);
+        //}
+        //catch (IOException e) {
+        //}
     }
 
     /**
@@ -61,108 +72,194 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        tela = new javax.swing.JDesktopPane(){
-            private Image image;
-            {
-                try {
-                    image = ImageIO.read(new URL("file:///C:/Users/pix01/Desenvolvimento/NetBeans/Feijuca/src/img/banner.png"));
-                }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+        tela = new javax.swing.JDesktopPane()
+        /*
+        private Image image;
+        {
+            try {
+                image = ImageIO.read(new URL("file:///C:/feijuca/img/banner.png"));
             }
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+            catch (IOException e) {
+                e.printStackTrace();
             }
+        }
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        }
+    }
+    */
+    ;
+    jButton1 = new javax.swing.JButton();
+    jButton2 = new javax.swing.JButton();
+    jButton3 = new javax.swing.JLabel();
+    jInternalFrame1 = new javax.swing.JInternalFrame();
+    jScrollPane1 = new javax.swing.JScrollPane();
+    jTextArea1 = new javax.swing.JTextArea();
+    jMenuBar1 = new javax.swing.JMenuBar();
+    jMenu2 = new javax.swing.JMenu();
+    btnMenuCaixa = new javax.swing.JMenu();
+    jMenu1 = new javax.swing.JMenu();
+    btnMenuEstoque = new javax.swing.JMenu();
+    jMenuItem3 = new javax.swing.JMenuItem();
+    btnMenuUsuarios = new javax.swing.JMenu();
+    jMenuItem2 = new javax.swing.JMenuItem();
 
-        };
-        jButton1 = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        btnMenuCaixa = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        btnMenuEstoque = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        btnMenuUsuarios = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+    setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+    setTitle("Feijuca");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Feijuca");
+    jButton1.setBackground(new java.awt.Color(255, 0, 0));
+    jButton1.setText("SAIR");
+    jButton1.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton1ActionPerformed(evt);
+        }
+    });
+    jButton1.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyPressed(java.awt.event.KeyEvent evt) {
+            jButton1KeyPressed(evt);
+        }
+    });
 
-        jButton1.setText("SAIR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
+    jButton2.setText("ATUALIZAR");
+    jButton2.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jButton2ActionPerformed(evt);
+        }
+    });
 
-        tela.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+    jButton3.setFont(new java.awt.Font("Tahoma", 2, 18)); // NOI18N
+    jButton3.setForeground(new java.awt.Color(255, 255, 255));
+    jButton3.setText("Nao Logado");
+    jButton3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Usuario", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(255, 255, 255))); // NOI18N
 
-        javax.swing.GroupLayout telaLayout = new javax.swing.GroupLayout(tela);
-        tela.setLayout(telaLayout);
-        telaLayout.setHorizontalGroup(
-            telaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaLayout.createSequentialGroup()
-                .addContainerGap(562, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-        );
-        telaLayout.setVerticalGroup(
-            telaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, telaLayout.createSequentialGroup()
-                .addContainerGap(408, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addContainerGap())
-        );
+    tela.setLayer(jButton1, javax.swing.JLayeredPane.DEFAULT_LAYER);
+    tela.setLayer(jButton2, javax.swing.JLayeredPane.DEFAULT_LAYER);
+    tela.setLayer(jButton3, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        btnMenuCaixa.setText("Caixa");
-        btnMenuCaixa.setEnabled(false);
+    javax.swing.GroupLayout telaLayout = new javax.swing.GroupLayout(tela);
+    tela.setLayout(telaLayout);
+    telaLayout.setHorizontalGroup(
+        telaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(telaLayout.createSequentialGroup()
+            .addGap(0, 0, Short.MAX_VALUE)
+            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+        .addGroup(telaLayout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addContainerGap(456, Short.MAX_VALUE))
+    );
+    telaLayout.setVerticalGroup(
+        telaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(telaLayout.createSequentialGroup()
+            .addGroup(telaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jButton3)
+            .addContainerGap())
+    );
 
-        jMenuItem1.setText("Nova Venda");
-        btnMenuCaixa.add(jMenuItem1);
+    jInternalFrame1.setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+    jInternalFrame1.setTitle("Produtos");
+    jInternalFrame1.setVisible(true);
 
-        jMenuBar1.add(btnMenuCaixa);
+    jTextArea1.setEditable(false);
+    jTextArea1.setColumns(26);
+    jTextArea1.setLineWrap(true);
+    jTextArea1.setRows(5);
+    jTextArea1.setTabSize(9);
+    jScrollPane1.setViewportView(jTextArea1);
+    jTextArea1.setText("");
+    for (Produto p: produtos){
+        //System.out.println(p.toString());
+        jTextArea1.append(p.getNome()+" - R$: "+p.getValor()+" - Quant: "+p.getQuant()+"\n");
+    }
 
-        btnMenuEstoque.setText("Estoque");
+    javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+    jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+    jInternalFrame1Layout.setHorizontalGroup(
+        jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+    );
+    jInternalFrame1Layout.setVerticalGroup(
+        jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(jInternalFrame1Layout.createSequentialGroup()
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+            .addGap(4, 4, 4))
+    );
 
-        jMenuItem3.setText("Cadastrar Produto");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        btnMenuEstoque.add(jMenuItem3);
+    jMenu2.setText("Feijuca");
+    jMenu2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    jMenu2.setEnabled(false);
+    jMenu2.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
+    jMenuBar1.add(jMenu2);
 
-        jMenuBar1.add(btnMenuEstoque);
+    btnMenuCaixa.setText("Caixa");
+    btnMenuCaixa.setEnabled(false);
 
-        btnMenuUsuarios.setText("Usuarios");
-        btnMenuUsuarios.setEnabled(false);
+    jMenu1.setText("jMenu1");
+    btnMenuCaixa.add(jMenu1);
 
-        jMenuItem2.setText("Cadastrar");
-        btnMenuUsuarios.add(jMenuItem2);
+    jMenuBar1.add(btnMenuCaixa);
 
-        jMenuBar1.add(btnMenuUsuarios);
+    btnMenuEstoque.setText("Estoque");
 
-        setJMenuBar(jMenuBar1);
+    jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
+    jMenuItem3.setText("Cadastrar Produto");
+    jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            jMenuItem3ActionPerformed(evt);
+        }
+    });
+    btnMenuEstoque.add(jMenuItem3);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tela, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tela, javax.swing.GroupLayout.Alignment.TRAILING)
-        );
+    jMenuBar1.add(btnMenuEstoque);
 
-        pack();
-        setLocationRelativeTo(null);
+    btnMenuUsuarios.setText("Usuarios");
+    btnMenuUsuarios.setEnabled(false);
+
+    jMenuItem2.setText("Cadastrar");
+    btnMenuUsuarios.add(jMenuItem2);
+
+    jMenuBar1.add(btnMenuUsuarios);
+
+    setJMenuBar(jMenuBar1);
+
+    javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+    getContentPane().setLayout(layout);
+    layout.setHorizontalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(layout.createSequentialGroup()
+            .addContainerGap()
+            .addComponent(tela)
+            .addGap(0, 0, 0)
+            .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+    );
+    layout.setVerticalGroup(
+        layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGap(0, 0, 0)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createSequentialGroup()
+                    .addComponent(jInternalFrame1)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 226, Short.MAX_VALUE))
+                .addComponent(tela))
+            .addContainerGap())
+    );
+
+    pack();
+    setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.exit(0);
+        this.dispose();
+        u=null;
+        Principal telaPrincipal = new Principal();
+        telaPrincipal.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -170,6 +267,19 @@ public class Principal extends javax.swing.JFrame {
         tela.add(TelaProdutoCadastro);
         TelaProdutoCadastro.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        Atualiza.AtualizaTudo();
+        jTextArea1.setText("");
+        for (Produto p: produtos){
+            //System.out.println(p.toString());
+            jTextArea1.append(p.getNome()+" - R$: "+p.getValor()+" - Quant: "+p.getQuant()+"\n");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1KeyPressed
 
     /**
      * @param args the command line arguments
@@ -207,6 +317,7 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     public void gera(){
+        /*
         Funcionario f1 = new Funcionario(1,"Ana Beatriz", "111", "111", "1111-1111", "1111-1111", "um@um.com", "endereco1", "caixa");
         funcionarios.add(f1);
         Funcionario f2 = new Funcionario(2,"Carlos Eduardo", "333", "333", "3333-3333", "3333-3333", "tres@tres.com", "endereco3", "gerente");
@@ -220,7 +331,11 @@ public class Principal extends javax.swing.JFrame {
         usuarios.add(u2);
         Usuario u3 = new Usuario(3, "Eduardo", "eduardo", "eduardo", f3.funcao,1, 3);
         usuarios.add(u3);
+        */
         /*
+        for (Produto p: produtos){
+            System.out.println(p.toString());
+        }
         for (Funcionario f: funcionarios){
             System.out.println(f.toString());
         }
@@ -230,14 +345,20 @@ public class Principal extends javax.swing.JFrame {
         */
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    static javax.swing.JMenu btnMenuCaixa;
-    static javax.swing.JMenu btnMenuEstoque;
-    static javax.swing.JMenu btnMenuUsuarios;
+    public static javax.swing.JMenu btnMenuCaixa;
+    public static javax.swing.JMenu btnMenuEstoque;
+    public static javax.swing.JMenu btnMenuUsuarios;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    public static javax.swing.JLabel jButton3;
+    public static javax.swing.JInternalFrame jInternalFrame1;
+    private javax.swing.JMenu jMenu1;
+    public static javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTextArea jTextArea1;
     static javax.swing.JDesktopPane tela;
     // End of variables declaration//GEN-END:variables
 }

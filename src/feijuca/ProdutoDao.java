@@ -9,15 +9,15 @@ public class ProdutoDao {
         this.connection = new ConnectionFactory().getConnection();
     }
     public void adiciona(Produto produto) {
-        String sql = "insert into produto (codigo, nome, valor) "
+        String sql = "insert into produto (nome, valor, quant) "
                 + "values (?,?,?)";
         try (
             // prepared statement para inserção
             PreparedStatement stmt = connection.prepareStatement(sql)) {
             // seta os valores
-            stmt.setInt(1,produto.getCodigo());
-            stmt.setString(2,produto.getNome());
-            stmt.setFloat(3,produto.getValor());
+            stmt.setString(1,produto.getNome());
+            stmt.setFloat(2,produto.getValor());
+            stmt.setInt(3,produto.getQuant());
             // executa
             stmt.execute();
         }

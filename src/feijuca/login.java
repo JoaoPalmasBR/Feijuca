@@ -14,6 +14,9 @@
  * limitations under the License.
  */
 package feijuca;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.util.Locale;
 import javax.swing.JOptionPane;
 
 /**
@@ -21,12 +24,18 @@ import javax.swing.JOptionPane;
  * @author pix01
  */
 public class login extends javax.swing.JInternalFrame {
-
+    static Usuario usuarioEX = null;
     /**
      * Creates new form login1
      */
     public login() {
         initComponents();
+        Toolkit tk = Toolkit.getDefaultToolkit();
+        Dimension d = tk.getScreenSize();
+        int largura = d.width;
+        int altura = d.height;
+        setPreferredSize(new Dimension(largura-20,altura-20));
+        this.setLocation(500,100);
     }
 
     /**
@@ -57,12 +66,14 @@ public class login extends javax.swing.JInternalFrame {
 
         tfUsuario.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfUsuario.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tfUsuario.setNextFocusableComponent(tfSenha);
 
         tfSenha.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         tfSenha.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        tfSenha.setNextFocusableComponent(btnLogin);
         tfSenha.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                tfSenhaentra1(evt);
+                tfSenhaKeyPressed(evt);
             }
         });
 
@@ -113,11 +124,6 @@ public class login extends javax.swing.JInternalFrame {
                 btnLoginActionPerformed(evt);
             }
         });
-        btnLogin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                btnLoginKeyPressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -154,18 +160,21 @@ public class login extends javax.swing.JInternalFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        pack();
+        setBounds(0, 0, 350, 422);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tfSenhaentra1(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSenhaentra1
+    private void tfSenhaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tfSenhaKeyPressed
         getRootPane().setDefaultButton(btnLogin);
-    }//GEN-LAST:event_tfSenhaentra1
+    }//GEN-LAST:event_tfSenhaKeyPressed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
+        verificaLogin();
+    }//GEN-LAST:event_btnLoginActionPerformed
+    public void verificaLogin(){
         String usuario1 = tfUsuario.getText();
         String senha1 = tfSenha.getText();
         boolean existe = false;
-        Usuario usuarioEX = null;
+        
         for (Usuario usu : Principal.usuarios){
             if (usu.getUsuario().equals(usuario1)){
                 existe = true;
@@ -178,8 +187,13 @@ public class login extends javax.swing.JInternalFrame {
         }
         if (existe==true){
             if (senha1.equals(usuarioEX.getSenha())){
+                //System.out.println("Titulo atual: "+title);
+                //System.out.println("Titulo Super: "+super.getTitle());
+                //Principal.titulo=usuarioEX.getNome();
+                //super.setTitle("Feijuca - Usuario: "+usuarioEX.getNome());
+                Principal.jButton3.setText("*"+usuarioEX.getNome()+"*, "+usuarioEX.getFuncao().toUpperCase());
                 if(usuarioEX.getFuncao().equals("caixa")){
-                    JOptionPane.showMessageDialog(rootPane, "Caixa");
+                    //JOptionPane.showMessageDialog(rootPane, "Caixa");
                     liberaCaixa();
                     //telaCaixa telaCaixaVar = new telaCaixa();
                     //telaCaixaVar.setVisible(true);
@@ -188,7 +202,7 @@ public class login extends javax.swing.JInternalFrame {
                 }
                 else{
                     if(usuarioEX.getFuncao().equals("gerente")){
-                        JOptionPane.showMessageDialog(rootPane, "Gerente");
+                        //JOptionPane.showMessageDialog(rootPane, "Gerente");
                         liberaGerente();
                         //telaEstoque telaEstoqueVar = new telaEstoque();
                         //telaEstoqueVar.setVisible(true);
@@ -197,7 +211,7 @@ public class login extends javax.swing.JInternalFrame {
                         //return;
                     }
                     else{
-                        JOptionPane.showMessageDialog(rootPane, "Chefe");
+                        //JOptionPane.showMessageDialog(rootPane, "Chefe");
                         liberaChefe();
                         this.dispose();
                         //statusLogin = true;
@@ -208,6 +222,7 @@ public class login extends javax.swing.JInternalFrame {
             else{
                 //Senha Incompativel
                 JOptionPane.showMessageDialog(rootPane, "Senha INCORRETA");
+                tfSenha.setFocusCycleRoot(true);
                 //this.dispose();
                 //login loginVar = new login();
                 //loginVar.setVisible(true);
@@ -220,14 +235,10 @@ public class login extends javax.swing.JInternalFrame {
             Principal.tela.add(telaLogin);
             telaLogin.setVisible(true);
         }
-       
-    }//GEN-LAST:event_btnLoginActionPerformed
-
-    private void btnLoginKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnLoginKeyPressed
-        getRootPane().setDefaultButton(btnLogin);
-    }//GEN-LAST:event_btnLoginKeyPressed
+    }
     public void liberaCaixa(){
         Principal.btnMenuCaixa.setEnabled(true);
+        Principal.jInternalFrame1.show();
     }
     public void liberaGerente(){
         liberaCaixa();
